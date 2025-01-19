@@ -32,4 +32,9 @@ public class ProdutoController {
     public Produto getProduct(@PathVariable("id") String id){
         return this.produtoRepository.findById(id).orElse(null);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") String id){
+        this.produtoRepository.deleteById(id);
+    }
 }
