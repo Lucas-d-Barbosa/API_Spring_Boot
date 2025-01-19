@@ -4,12 +4,10 @@ import com.API_Spring_Boot.produtosapi.model.Produto;
 import com.API_Spring_Boot.produtosapi.repository.ProdutoRepository;
 import jakarta.persistence.PostUpdate;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import  jakarta.persistence.Entity;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -28,5 +26,10 @@ public class ProdutoController {
         produtoRepository.save(produto);
         System.out.println(produto);
         return produto;
+    }
+
+    @GetMapping("/{id}")
+    public Produto getProduct(@PathVariable("id") String id){
+        return this.produtoRepository.findById(id).orElse(null);
     }
 }
