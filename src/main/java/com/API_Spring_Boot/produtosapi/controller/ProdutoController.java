@@ -9,7 +9,7 @@ import  jakarta.persistence.Entity;
 
 import java.util.Optional;
 import java.util.UUID;
-
+import java.util.List;
 @RestController
 @RequestMapping("produtos")
 public class ProdutoController {
@@ -42,5 +42,11 @@ public class ProdutoController {
     public void update(@PathVariable("id") String id, @RequestBody Produto produto){
       produto.setId(id);
       produtoRepository.save(produto);
+    }
+
+    @GetMapping("/")
+    public List<Produto> getAllProductsFilter(@RequestParam("name") String name) {
+        return this.produtoRepository.findByName(name);
+        
     }
 }
