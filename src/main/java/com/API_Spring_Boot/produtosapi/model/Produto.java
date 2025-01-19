@@ -1,24 +1,42 @@
 package com.API_Spring_Boot.produtosapi.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "produto")
 public class Produto {
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "price")
     private Double price;
-    private Integer id;
+
+    @Id
+    @Column(name = "id", unique = true)
+    private String id;
+
+    @Column(name = "description")
     private String description;
 
+    public Produto() {
+
+    }
+
     public Produto(String name, Double price, String description) {
-        this.id = 1;
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-    public String getDescrition() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescrition(String descrition) {
-        this.description = descrition;
+    public void setDescrition(String description) {
+        this.description = description;
     }
 
     public String getName() {
@@ -37,20 +55,20 @@ public class Produto {
         this.price = price;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     @Override
     public String toString(){
         return String.format(
-                "%d, %s: %s - R$ %.2f",
+                "%s, %s: %s - R$ %.2f",
                 this.getId(), this.name,
-                this.getDescrition(), this.getPrice()
+                this.getDescription(), this.getPrice()
         );
     }
 }
